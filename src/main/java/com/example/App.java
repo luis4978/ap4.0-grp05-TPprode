@@ -1,5 +1,6 @@
 package com.example;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -14,22 +15,19 @@ public class App
 {
     public static void main( String[] args ) throws IOException
     {
-        //C:\Users\Luis\Desktop
-        /*Codigo a completar  */
-        Path archivo = Paths.get("C://Users//Luis//Desktop");
-        Scanner lector = new Scanner(archivo);
-        String titulo = lector.nextLine();
-        lector.useDelimiter("[;\\n]");
-        Ronda ronda = new Ronda();
-        while (lector.nextInt()) {
-            int clave = lector.nextInt();
-            String equipo1 = lector.next();
-            int golesEq1 = lector.nextInt();
-            int golesEq2 = lector.nextInt();
-            String equipo2 = lector.next();
-            
-
-            ronda.getPartidosHashMap().put(null, null)
-        }
+        Path archivoEquipos = Paths.get("src//main//java//com//example//equiposqatar2022.csv");
+        Path archivoPartidos = Paths.get("src//main//java//com//example//partidosqatar2022.csv");
+        Ronda ronda1 = new Ronda();
+        /*
+         * Lo ideal seria, de la lista de partidos que tenemos
+         * hacer varios archivos de partidos y guardarlo como ronda1, ronda2,etc.
+         * de momento cargamos los partidos de todas las rondas.
+         * Repito "Seria lo ideal jeje"
+         */
+        ronda1.cargaEquipos(archivoEquipos);
+        ronda1.cargaPartidos(archivoPartidos);
+        /*for (Equipo eq : ronda1.getEquiposHashMap().values()) {
+            System.out.println(eq.toString());
+        }*/
     }
 }

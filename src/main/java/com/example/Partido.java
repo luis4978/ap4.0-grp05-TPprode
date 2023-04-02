@@ -1,41 +1,43 @@
 package com.example;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-//import lombok.NoArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-/*
+import lombok.ToString;
+
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
- */
+@ToString
+@NoArgsConstructor
 
 public class Partido {
-    int rondaKEY; //Valor que identifica un partido de forma univoca
-    Equipo equipo1;
-    Equipo equipo2;
-    Equipo ganador;
-    int golesEquipo1;
-    int golesEquipo2;
-    ResultadoEnum resultado;
+    private int rondaKEY; //Valor que identifica un partido de forma univoca
+    private Equipo equipo1;
+    private int golesEquipo1;
+    private int golesEquipo2;
+    private Equipo equipo2;
 
-    /*Metodo que devuelve un resultado del tipo ResultadoEnum
-     comparando los goles de cada equipo.  se inicializa en empate 
-     y se modifica el valor en los condicionales  */
-    public void resultadoPartido(){
-        if (golesEquipo1 > golesEquipo2) {
-            this.ganador = this.equipo1;
-        }if (golesEquipo2 > golesEquipo1) {
-            this.ganador = this.equipo2;
-        }
-    }
-
+    /*
+     * Metodo que calcula que equipo gano el partido, recibe
+     * como argumento un equipo y verifica su resultado devolviendo
+     * un valor del tipo ResultadoEnum.
+    */
     public ResultadoEnum resultado(Equipo equipo){
+        Equipo ganador = new Equipo();
+        if (golesEquipo1 > golesEquipo2) {
+            ganador = this.equipo1;
+        }if (golesEquipo2 > golesEquipo1) {
+            ganador = this.equipo2;
+        }
         ResultadoEnum resultado = ResultadoEnum.EMPATE;
-        if (equipo.equals(this.ganador)) {
+        if (equipo.getNombreEquipo().equals(ganador.getNombreEquipo())) {
             resultado = ResultadoEnum.GANADOR;
         }
-        if (!equipo.equals(this.ganador)) {
+        if (!equipo.equals(ganador)) {
             resultado = ResultadoEnum.PERDEDOR;
         }
         return resultado;
