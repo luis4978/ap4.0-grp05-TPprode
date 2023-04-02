@@ -71,8 +71,6 @@ public class Ronda {
              */ 
             if (esEncabezado) {
                 encabezado = lector.nextLine();
-                System.out.println(encabezado);
-                lector.hasNextLine();
                 esEncabezado = false;
             }
             /*
@@ -85,7 +83,7 @@ public class Ronda {
             int temporada = lector.nextInt();
             String pais = lector.next();
             short partidosJugados = lector.nextShort();
-            lector.reset();
+            lector.nextLine();
             /*
              * Se crea un objeto equipo con las variables arriba declaradas
              * y se guarda en el HashMap <String, Equipo> atributo de clase.
@@ -100,17 +98,18 @@ public class Ronda {
         Scanner lector = new Scanner(archivoPartidos);
         boolean esEncabezado = true;
         String encabezado;
-        while (lector.hasNextInt()) { 
+        lector.useDelimiter("[;\\n]");
+        while (lector.hasNextLine()) { 
             if (esEncabezado) {
                 encabezado = lector.nextLine();
-                lector.useDelimiter("[;\\n]");
                 esEncabezado = false;
             }
-            int rondaKEY = lector.nextInt(); 
-            String equipo1 = lector.next();
+            int rondaKEY = lector.nextInt();
+            String equipo1 = lector.next();          
             int golesEquipo1 = lector.nextInt();
             int golesEquipo2 = lector.nextInt();
             String equipo2 = lector.next();
+            lector.nextLine();
             Equipo eq1 = this.equiposHashMap.get(equipo1);
             Equipo eq2 = this.equiposHashMap.get(equipo2);
             Partido partido = new Partido(rondaKEY, eq1, golesEquipo1, golesEquipo2, eq2);

@@ -11,7 +11,6 @@ import lombok.ToString;
 @Getter
 @Setter
 @AllArgsConstructor
-@ToString
 @NoArgsConstructor
 
 public class Partido {
@@ -41,5 +40,10 @@ public class Partido {
             resultado = ResultadoEnum.PERDEDOR;
         }
         return resultado;
+    }
+    @Override
+    public String toString(){
+        return "[Ronda="+rondaKEY+" Equipo1="+equipo1.getNombreEquipo()
+        +"="+golesEquipo1+" - "+golesEquipo2+"="+equipo2.getNombreEquipo()+"]";
     }
 }

@@ -24,10 +24,18 @@ public class App
          * de momento cargamos los partidos de todas las rondas.
          * Repito "Seria lo ideal jeje"
          */
+        /*
+         * Se tuvo que añadir un ";" al final de cada linea de los archivos csv 
+         * para una lectura correcta del archivo, ya que daba un error de lectura
+         * del lector de Scanner.  Se debe consultar y corregir esto con el profesor
+         */
         ronda1.cargaEquipos(archivoEquipos);
         ronda1.cargaPartidos(archivoPartidos);
-        /*for (Equipo eq : ronda1.getEquiposHashMap().values()) {
+        for (Equipo eq : ronda1.getEquiposHashMap().values()) {
             System.out.println(eq.toString());
-        }*/
+        }
+        for (Partido p : ronda1.getPartidosHashMap().values()) {
+            System.out.println(p.toString());
+        }
     }
 }
