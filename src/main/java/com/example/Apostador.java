@@ -1,18 +1,48 @@
 package com.example;
 
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
-import lombok.AllArgsConstructor;
+import java.util.Scanner;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Setter
 @Getter
 @ToString
 public class Apostador extends Persona {
-    ArrayList <Ticket> ticketPartido;
-    //Falta definir si se deben agregar mas metodos y variable
+    /*
+     * Un apostador puede tener varios tickets de
+     * distintas apuestas, se almacenan en un ArrayList.
+     */
+    ArrayList <Ticket> ticketApuesta;
+    private int idApostador;
+
+    public Apostador(int dni, String nombreCompleto, int idApostador){
+        super(dni, nombreCompleto);
+        this.ticketApuesta = new ArrayList<>();
+        this.idApostador = idApostador;
+    }
+
+    public void cargaApuestas(Path archivoApuestasRonda) throws IOException{
+        Scanner lector = new Scanner(archivoApuestasRonda);
+        boolean esEncabezado = true;
+        String encabezado;
+        lector.useDelimiter("[;\\n]");
+        while (lector.hasNextLine()) {
+            if(esEncabezado){
+                encabezado = lector.nextLine();
+                esEncabezado = false;
+            }
+            int rondaKey = lector.nextInt();
+            String equipo = lector.next();
+            int resu = lector.nextInt();
+            lector.nextLine();
+            ResultadoEnum resultado = ResultadoEnum.values()[resu];
+            Ticket ticket = new Ticket(rondaKey, equipo, resultado);
+            this.ticketApuesta.add(ticket);
+        }
+    }
+        
 }

@@ -14,4 +14,5 @@ import lombok.ToString;
 public class Persona {
     private int dni;
     private String nombreCompleto;
+    
 }
