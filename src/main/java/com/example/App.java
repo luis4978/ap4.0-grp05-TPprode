@@ -50,14 +50,15 @@ public class App
         Partido partido;
         Equipo eq;
         for (Ticket tk : ap1.getTicketApuesta()) {
-            partido = ronda1.partido(tk.getRonda());
-            eq = ronda1.getEquiposHashMap().get(tk.getEquipo());
+            partido = ronda1.buscarPartido(tk.getRondaKey());
+            eq = ronda1.buscarEquipo(tk.getEquipoKey()); 
             if (tk.getPronostico()==partido.resultado(eq)) {
-                System.out.println(partido.toString());
+                System.out.println(partido.toString()+"\n");
                 puntos++;
             }
         }
         System.out.println("Puntos obtenidos de "+ap1.getNombreCompleto() + " " + puntos);
+        
 
     }
 }

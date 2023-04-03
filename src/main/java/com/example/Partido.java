@@ -26,24 +26,25 @@ public class Partido {
      * un valor del tipo ResultadoEnum.
     */
     public ResultadoEnum resultado(Equipo equipo){
-        Equipo ganador = new Equipo();
+        ResultadoEnum resultado = null;
         if (golesEquipo1 > golesEquipo2) {
-            ganador = this.equipo1;
-        }if (golesEquipo2 > golesEquipo1) {
-            ganador = this.equipo2;
+            if (equipo.equals(this.equipo1)) {
+                resultado = ResultadoEnum.GANADOR;
+            }
+
+        }if (golesEquipo1 < golesEquipo2) {
+            if (equipo.equals(this.equipo2)) {
+                resultado = ResultadoEnum.PERDEDOR;
+            }
         }
-        ResultadoEnum resultado = ResultadoEnum.EMPATE;
-        if (equipo.getNombreEquipo().equals(ganador.getNombreEquipo())) {
-            resultado = ResultadoEnum.GANADOR;
-        }
-        if (!equipo.equals(ganador)) {
-            resultado = ResultadoEnum.PERDEDOR;
+        if (golesEquipo1 == golesEquipo2) {
+            resultado = ResultadoEnum.EMPATE;
         }
         return resultado;
     }
     @Override
     public String toString(){
-        return "[Ronda="+rondaKEY+" Equipo1="+equipo1.getNombreEquipo()
+        return "[Ronda="+rondaKEY+" "+equipo1.getNombreEquipo()
         +"="+golesEquipo1+" - "+golesEquipo2+"="+equipo2.getNombreEquipo()+"]";
     }
 }

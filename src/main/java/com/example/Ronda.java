@@ -41,22 +41,28 @@ public class Ronda {
 
     /* Metodo que recibe como argumento un entero 
      * que es valor clave para recorrer partidosHashMap y buscar un partido,
-     * la Clase Ticket tiene un atributo
-     * con un valor que define la apuesta sobre un partido
-     * de forma univoca.
-     * El metodo devuelve un bjeto del tipo Partido.
+     * el metodo devuelve un objeto del tipo Partido.
      */
-    public Partido partido(int rondaKey){
+    public Partido buscarPartido(int rondaKey){
         Partido partidoBuscado = new Partido();
-        partidoBuscado = partidosHashMap.get(rondaKey);
+        partidoBuscado = this.partidosHashMap.get(rondaKey);
         return partidoBuscado;
     }
+    
+    /* Metodo que recibe como argumento un String que es 
+     * valor clave para recorrer partidosHashMap y buscar un partido,
+     * el metodo devuelve un objeto del tipo Equipo.
+     */
+    public Equipo buscarEquipo(String equipoKey){
+        Equipo equipoBuscado = new Equipo();
+        equipoBuscado = this.equiposHashMap.get(equipoKey);
+        return equipoBuscado;
+    }
 
-    //Ruta del archivo "Equipos Qatar 2022.csv" C://Users//Luis//Desktop
-    /*El metodo recibe un archivo csv que tiene la lista de paises
+    /*
+     * El metodo recibe un archivo csv que tiene la lista de paises
      * que participaron en el mundial de Qatar y los carga a un 
-     * ArrayList de objetos tipo Equipo.
-     * 
+     * HashMap de objetos de tipo Equipo.
      */
     public void cargaEquipos(Path archivoEquipos) throws IOException{
         Scanner lector = new Scanner(archivoEquipos);
@@ -94,6 +100,11 @@ public class Ronda {
         lector.close();
     }
 
+    /*
+     * Metodo recibe un archivo csv que tiene una lista de una
+     * ronda de partidos del mundial Qatar 2022 y los carga en
+     * un HashMap de objetos del tipo Partido.
+     */
     public void cargaPartidos(Path archivoPartidos) throws IOException{
         Scanner lector = new Scanner(archivoPartidos);
         boolean esEncabezado = true;
