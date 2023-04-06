@@ -30,7 +30,7 @@ public class Apostador extends Persona {
         boolean esEncabezado = true;
         String encabezado;
         lector.useDelimiter("[;\\n\\r]");
-        while (lector.hasNextInt()) {
+        while (lector.hasNextLine()) {
             if(esEncabezado){
                 encabezado = lector.nextLine();
                 esEncabezado = false;
@@ -38,6 +38,7 @@ public class Apostador extends Persona {
             int rondaKey = lector.nextInt();
             String equipo = lector.next();
             int resu = lector.nextInt();
+            lector.nextLine();
             ResultadoEnum resultado = ResultadoEnum.values()[resu];
             Ticket ticket = new Ticket(rondaKey, equipo, resultado);
             this.ticketApuesta.add(ticket);

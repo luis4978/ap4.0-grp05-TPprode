@@ -68,7 +68,12 @@ public class Ronda {
         Scanner lector = new Scanner(archivoEquipos);
         boolean esEncabezado = true;
         String encabezado; 
-        lector.useDelimiter("[;\\n]");
+        /*
+         * lector.useLocale(Locale.forLanguageTag("es-AR"));
+         * se setea el scanner para configurar un lenguaje especifico.
+         * se escribe la linea antes del useDelimiter()
+         */
+        lector.useDelimiter("[;\\n\\r]");
         while (lector.hasNextLine()) {
             /*
              * La variable esEncabezado controla si es la primera
@@ -109,7 +114,7 @@ public class Ronda {
         Scanner lector = new Scanner(archivoPartidos);
         boolean esEncabezado = true;
         String encabezado;
-        lector.useDelimiter("[;\\n]");
+        lector.useDelimiter("[;\\n\\r]");
         while (lector.hasNextLine()) { 
             if (esEncabezado) {
                 encabezado = lector.nextLine();
