@@ -11,7 +11,5 @@ import lombok.Setter;
 public class Pronostico {
     Partido partido;
     Equipo equipo;
-    ResultadoEnum resultado;
-    //Falta definir si se agregan mas variables y metodos
-    
+    ResultadoEnum resultado;    
 }

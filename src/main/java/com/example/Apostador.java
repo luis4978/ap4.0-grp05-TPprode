@@ -8,21 +8,22 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Setter
 @Getter
+@Setter
 @ToString
-public class Apostador extends Persona {
+public class Apostador  {
     /*
      * Un apostador puede tener varios tickets de
      * distintas apuestas, se almacenan en un ArrayList.
      */
     ArrayList <Ticket> ticketApuesta;
     private int idApostador;
+    private String nombreCompleto;
 
-    public Apostador(int dni, String nombreCompleto, int idApostador){
-        super(dni, nombreCompleto);
+    public Apostador(int dni, String nombreCompleto){
+        this.idApostador = dni;
+        this.nombreCompleto = nombreCompleto;
         this.ticketApuesta = new ArrayList<>();
-        this.idApostador = idApostador;
     }
 
     public void cargaApuestas(Path archivoApuestasRonda) throws IOException{
@@ -43,6 +44,5 @@ public class Apostador extends Persona {
             Ticket ticket = new Ticket(rondaKey, equipo, resultado);
             this.ticketApuesta.add(ticket);
         }
-    }
-        
+    }        
 }
