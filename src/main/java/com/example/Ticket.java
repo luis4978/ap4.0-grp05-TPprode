@@ -22,7 +22,7 @@ public class Ticket {
      * Variable pronostico contiene un valor del tipo
      * ResultadoEnum (GANADOR, EMPATE, PERDEDOR).
      */
-    private int rondaKey;
+    private int partidoKey;
     private String equipoKey;
     private ResultadoEnum pronostico;
 

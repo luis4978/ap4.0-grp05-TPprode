@@ -1,10 +1,5 @@
 package com.example;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,10 +12,10 @@ import lombok.Setter;
 public class Ronda {
     private int numeroRonda;
     /* Atributo de clase
-     * partidosHashMap usa como clave univoca el valor de
+     * unaRondaHashMap usa como clave univoca el valor de
      * la primera columna del archivo "Partidos Qatar 2022.csv"
      */
-    private HashMap<Integer, Partido> partidosHashMap;
+    private HashMap<Integer, Partido> unaRondaHashMap;
 
     public Ronda(int numeroRonda){
         /*
@@ -28,6 +23,11 @@ public class Ronda {
          * Recibe como argumento el numero de ronda a cargar.
          */
         this.numeroRonda = numeroRonda;
-        this.partidosHashMap = new HashMap<>();
+        this.unaRondaHashMap = new HashMap<>();
+    }
+    public Partido buscarPartido(int partidoKey){
+        Partido p;
+        p = this.unaRondaHashMap.get(partidoKey);
+        return p;
     }
 }

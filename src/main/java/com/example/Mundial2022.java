@@ -9,7 +9,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Mundial2022 {
-    private ArrayList<HashMap<Integer, Partido>> mundial;
+    /*
+    El atributo de clase mundial contiene objetos Ronda. Cada Ronda contiene
+    un hashmap de partidos. 
+     */
+    private HashMap<Integer, Ronda> mundial;
     private ArrayList<String[]> totalPartidos;
     private final int TOTAL_RONDAS = 7;
     /* Atributo de clase equiposHashMap usa como clave univoca el valor de
@@ -22,7 +26,7 @@ public class Mundial2022 {
      * de QATAR2022.
      */
     Mundial2022(){
-        this.mundial = new ArrayList<>();
+        this.mundial = new HashMap<>();
         this.totalPartidos = new ArrayList<>();
         this.equiposHashMap = new HashMap<>();
     }
@@ -30,10 +34,13 @@ public class Mundial2022 {
     /* Metodo privado que recibe como argumento un String que es valor clave 
      * para buscar en esquiposHashMap. Devuelve un objeto del tipo Equipo.
      */
-    private Equipo buscarEquipo(String equipoKey){
+    public Equipo buscarEquipo(String equipoKey){
         Equipo equipoBuscado = new Equipo();
         equipoBuscado = this.equiposHashMap.get(equipoKey);
         return equipoBuscado;
+    }
+    public Ronda buscarRonda(int rondaKey){
+        return this.mundial.get(rondaKey);
     }
     /*
      * El metodo recibe lee un archivo csv que tiene la lista de paises
@@ -59,10 +66,10 @@ public class Mundial2022 {
                     /*
                      * Si es una misma ronda agrega el obj a HashMap
                      */
-                    ronda.getPartidosHashMap().put(p.getRondaKEY(), p);
+                    ronda.getUnaRondaHashMap().put(p.getPartidoKEY(), p);
                 }
             }
-            this.mundial.add(ronda.getPartidosHashMap());
+            this.mundial.put(ronda.getNumeroRonda(), ronda);
         }
     }
     public void mostrarCargaEquipos(){
@@ -78,11 +85,9 @@ public class Mundial2022 {
         /*
          * Bucle para mostrar la carga de partidos del campeonato.
          */
-        int numRonda = 0;
-        for (HashMap<Integer, Partido> ronda : this.mundial) {
-            numRonda++;
-            System.out.println("Partidos de la " + numRonda + "° ronda: ");
-            for (Partido partido : ronda.values() ) {
+        for (Ronda r : this.mundial.values()) {
+            System.out.println("Partidos de la " + r.getNumeroRonda() + "° ronda: ");
+            for (Partido partido : r.getUnaRondaHashMap().values() ) {
                 System.out.println(partido.toString());    
             }
         }

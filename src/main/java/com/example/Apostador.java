@@ -1,48 +1,58 @@
 package com.example;
 
-import java.io.IOException;
-import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Scanner;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
 public class Apostador  {
     /*
      * Un apostador puede tener varios tickets de
      * distintas apuestas, se almacenan en un ArrayList.
+     * Validar que es un equippo participante.
      */
     ArrayList <Ticket> ticketApuesta;
     private int idApostador;
     private String nombreCompleto;
 
+    /*
+     * Metodo contarAciertos recibe de alguna manera un objeto Mundial2022
+     * metodo buscar partido devuelve un partido en clase mundial2022.
+     */
     public Apostador(int dni, String nombreCompleto){
         this.idApostador = dni;
         this.nombreCompleto = nombreCompleto;
         this.ticketApuesta = new ArrayList<>();
+    }   
+
+    /*
+     * El metodo contarAciertos() cuenta los aciertos de una sola ronda
+     * 
+     */
+    public void cargarTicket(Ticket tk){
+        this.ticketApuesta.add(tk);
     }
 
-    public void cargaApuestas(Path archivoApuestasRonda) throws IOException{
-        Scanner lector = new Scanner(archivoApuestasRonda);
-        boolean esEncabezado = true;
-        String encabezado;
-        lector.useDelimiter("[;\\n\\r]");
-        while (lector.hasNextLine()) {
-            if(esEncabezado){
-                encabezado = lector.nextLine();
-                esEncabezado = false;
+    public int contarAciertos(Mundial2022 mundial, int rondaKey){
+        int aciertos = 0;
+        for (Ticket tk : this.ticketApuesta) {
+            Ronda r = mundial.buscarRonda(rondaKey);
+            Partido p = r.buscarPartido(tk.getPartidoKey());
+            ResultadoEnum pronostico = tk.getPronostico();
+            ResultadoEnum resultado = p.resultado(mundial.buscarEquipo(tk.getEquipoKey()));
+            if (pronostico.equals(resultado)) {
+                aciertos++;
             }
-            int rondaKey = lector.nextInt();
-            String equipo = lector.next();
-            int resu = lector.nextInt();
-            lector.nextLine();
-            ResultadoEnum resultado = ResultadoEnum.values()[resu];
-            Ticket ticket = new Ticket(rondaKey, equipo, resultado);
-            this.ticketApuesta.add(ticket);
         }
-    }        
+        return aciertos;
+    }
+    @Override
+    public String toString(){
+        String msj = "Apostador= "+nombreCompleto + " " + idApostador + "\n";
+        for (Ticket tk : ticketApuesta) {
+            msj += tk.toString() + "\n";
+        }
+        return msj;
+    } 
 }

@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 
 public class Partido {
-    private int rondaKEY; //Valor que identifica un partido de forma univoca
+    private int partidoKEY; //Valor que identifica un partido de forma univoca
     private Equipo equipo1;
     private int golesEquipo1;
     private int golesEquipo2;
@@ -41,7 +41,7 @@ public class Partido {
     }
     @Override
     public String toString(){
-        return "[Ronda="+rondaKEY+" "+equipo1.getNombreEquipo()
+        return "[Partido="+partidoKEY+" "+equipo1.getNombreEquipo()
         +"="+golesEquipo1+" - "+golesEquipo2+"="+equipo2.getNombreEquipo()+"]";
     }
 }

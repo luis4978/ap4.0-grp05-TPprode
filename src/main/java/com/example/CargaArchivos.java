@@ -11,7 +11,7 @@ final class CargaArchivos {
     (Path equipos, HashMap<String, Equipo> equiposHashMap) throws IOException{
         Scanner lector = new Scanner(equipos);
         boolean esEncabezado = true;
-        String encabezado; 
+        String encabezado;
         /*
          * lector.useLocale(Locale.forLanguageTag("es-AR"));se configura el scanner
          * para un lenguaje. Se coloca antes del useDelimiter().
@@ -51,7 +51,7 @@ final class CargaArchivos {
     (Path partidos, ArrayList<String[]> totalPartidos) throws IOException{
         /*
          * Se carga cada linea en un Array de String[] y luego se añade a
-         * un ArrayList<String[]>
+         * un ArrayList<String[]> de la clase Mundial2022.
          */
         Scanner lector = new Scanner(partidos);
         boolean esEncabezado = true;
@@ -95,6 +95,6 @@ final class CargaArchivos {
             Apostador ap = new Apostador(id, nombreCompleto);
             apostadores.put(ap.getIdApostador(), ap);
         }
-
+        lector.close();
     }
 }

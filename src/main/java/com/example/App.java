@@ -4,10 +4,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.nio.file.Path;
 
-/**
- * Hello world!
- *
- */
+
 public class App 
 {
     public static void main( String[] args ) throws IOException
@@ -19,6 +16,7 @@ public class App
 
         Mundial2022 campeonato = new Mundial2022();
         Prode prode = new Prode();
+        
         /*
          * Metodos estaticos que vuelcan el archivo en las colecciones que 
          * reciben como segundo argumento.
@@ -31,6 +29,7 @@ public class App
          * Metodo de clase que carga el mundial Qatar 2022
          */
         campeonato.cargarMundial();
+        prode.cargarTicketsApuestas();
         /*
          * Metodos para comprobar la carga correcta de los archivos
          */
