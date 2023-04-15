@@ -39,6 +39,20 @@ public class Prode {
         }
     }
 
+    public void mostrarAciertos(Mundial2022 campeonato){
+        /*
+         * al llamar al metodo contarAciertos lanza error de 
+         * partido null.
+         */
+        for (Apostador ap : this.apostadores.values()) {
+            for (Ronda r : campeonato.getPartidos().values()) {
+                System.out.println("Cantidad aciertos de "
+                                    + r.getNumeroRonda()+ "° ronda "
+                                    + ap.getNombreCompleto() + ": "
+                                    +ap.contarAciertos(campeonato, r));
+            }
+        }
+    }
     /*
      * Metodo que muestra los datos del array totalApuestas.
      */
@@ -55,21 +69,4 @@ public class Prode {
             System.out.println(ap.toString());
         }
     }
-      /*   se deberia integrar en la clase apostador.     
-        for (Ticket tk : ap1.getTicketApuesta()) {
-            System.out.println(tk.toString());
-        }
-        int puntos = 0;
-        Partido partido;
-        Equipo eq;
-        for (Ticket tk : ap1.getTicketApuesta()) {
-            partido = ronda1.buscarPartido(tk.getRondaKey());
-            eq = ronda1.buscarEquipo(tk.getEquipoKey()); 
-            if (tk.getPronostico()==partido.resultado(eq)) {
-                System.out.println(partido.toString()+"\n");
-                puntos++;
-            }
-        }
-        System.out.println("Puntos obtenidos de "+ap1.getNombreCompleto() + " " + puntos); 
-         */
 }
