@@ -22,8 +22,8 @@ public class App
         CargaArchivos.cargarArchivoPartidos(rutaPartidos, campeonato);
         CargaArchivos.cargarArchivoApostadores(archivoApostadores, prode.getApostadores());
 
-        prode.cargarTicketsApuestas();
-        prode.mostrarAciertos(campeonato);
+        prode.cargarTicketsApuestas();//carga los tickets de cada apostador
+        prode.mostrarAciertos(campeonato);//Muestra los aciertos de cada apostador por ronda
         /*
          * Metodos para comprobar la carga correcta de los archivos
          */
