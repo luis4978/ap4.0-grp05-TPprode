@@ -43,29 +43,43 @@ final class CargaArchivos {
         }
         lector.close();
     }
-    /*
-     * Metodo estatico que vuelca el archivo partidosqatar2022.csv
-     * en un ArrayList<String[]> atributo de clase.
-     */
-    protected static void cargaArchivoPartidos
-    (Path partidos, ArrayList<String[]> totalPartidos) throws IOException{
-        /*
-         * Se carga cada linea en un Array de String[] y luego se añade a
-         * un ArrayList<String[]> de la clase Mundial2022.
-         */
+    
+    protected static void cargarArchivoPartidos
+    (Path partidos, Mundial2022 campeonato) throws IOException{
         Scanner lector = new Scanner(partidos);
         boolean esEncabezado = true;
         String encabezado;
         lector.useDelimiter("[;\\n\\r]");
-        while (lector.hasNextLine()) { 
+        int contadorRonda = 1;
+        Ronda ronda = new Ronda(contadorRonda);
+        while (lector.hasNext()) { 
             if (esEncabezado) {
                 encabezado = lector.nextLine();
                 esEncabezado = false;
             }
-            totalPartidos.add(lector.nextLine().split(";"));
+            int partidoKEY = lector.nextInt();
+            Equipo eq1 = campeonato.buscarEquipo(lector.next());
+            int golesEq1 = lector.nextInt();
+            int golesEq2 = lector.nextInt();
+            Equipo eq2 = campeonato.buscarEquipo(lector.next());
+            lector.nextLine();
+            Partido p = new Partido(partidoKEY, eq1, golesEq1, golesEq2, eq2);
+            if(!(partidoKEY/100 == contadorRonda)){
+                /*
+                 * Si es una misma ronda agrega el obj a HashMap
+                 */
+                campeonato.getPartidos().put(contadorRonda, ronda);
+                contadorRonda++;
+                ronda = new Ronda(contadorRonda);
+            }
+            ronda.getUnaRondaHashMap().put(p.getPartidoKEY(), p);
+            if (contadorRonda == campeonato.getTOTAL_RONDAS()) {
+                campeonato.getPartidos().put(contadorRonda, ronda);
+            }   
         }
         lector.close();
-    }    
+    }
+      
     /*
      * Metodo estatico que vuelca los datos del archivo pronosticoqatar2022.csv
      * en un array para su posterior tratamiento de datos.

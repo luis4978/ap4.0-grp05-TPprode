@@ -17,25 +17,19 @@ public class App
         Mundial2022 campeonato = new Mundial2022();
         Prode prode = new Prode();
         
-        /*
-         * Metodos estaticos que vuelcan el archivo en las colecciones que 
-         * reciben como segundo argumento.
-         */
         CargaArchivos.cargaArchivoEquipos(rutaEquipos, campeonato.getEquiposHashMap());
-        CargaArchivos.cargaArchivoPartidos(rutaPartidos, campeonato.getTotalPartidos());
         CargaArchivos.cargarArchivoApuestas(rutaApuestas, prode.getTotalApuestas());
+        CargaArchivos.cargarArchivoPartidos(rutaPartidos, campeonato);
         CargaArchivos.cargarArchivoApostadores(archivoApostadores, prode.getApostadores());
-        /*
-         * Metodo de clase que carga el mundial Qatar 2022
-         */
-        campeonato.cargarMundial();
+
         prode.cargarTicketsApuestas();
+        prode.mostrarAciertos(campeonato);
         /*
          * Metodos para comprobar la carga correcta de los archivos
          */
-        campeonato.mostrarCargaEquipos();
-        campeonato.mostrarCargaMundial();
-        prode.mostrarCargaApuestas();
-        prode.mostrarCargaApostadores();
+        //campeonato.mostrarCargaEquipos();
+        //campeonato.mostrarCargaMundial();
+        //prode.mostrarCargaApuestas();
+        //prode.mostrarCargaApostadores();
     }
 }

@@ -10,43 +10,39 @@ public class Apostador  {
     /*
      * Un apostador puede tener varios tickets de
      * distintas apuestas, se almacenan en un ArrayList.
-     * Validar que es un equippo participante.
      */
     ArrayList <Ticket> ticketApuesta;
     private int idApostador;
     private String nombreCompleto;
 
-    /*
-     * Metodo contarAciertos recibe de alguna manera un objeto Mundial2022
-     * metodo buscar partido devuelve un partido en clase mundial2022.
-     */
     public Apostador(int dni, String nombreCompleto){
         this.idApostador = dni;
         this.nombreCompleto = nombreCompleto;
         this.ticketApuesta = new ArrayList<>();
     }   
 
-    /*
-     * El metodo contarAciertos() cuenta los aciertos de una sola ronda
-     * 
-     */
     public void cargarTicket(Ticket tk){
         this.ticketApuesta.add(tk);
     }
 
-    public int contarAciertos(Mundial2022 mundial, int rondaKey){
+    /*
+     * El metodo contarAciertos() cuenta los aciertos de una sola ronda
+     */
+    public int contarAciertos(Mundial2022 mundial, Ronda ronda){
         int aciertos = 0;
         for (Ticket tk : this.ticketApuesta) {
-            Ronda r = mundial.buscarRonda(rondaKey);
-            Partido p = r.buscarPartido(tk.getPartidoKey());
-            ResultadoEnum pronostico = tk.getPronostico();
-            ResultadoEnum resultado = p.resultado(mundial.buscarEquipo(tk.getEquipoKey()));
-            if (pronostico.equals(resultado)) {
-                aciertos++;
-            }
+            if (tk.getPartidoKey()/100 == ronda.getNumeroRonda()) {
+                Partido partido = ronda.buscarPartido(tk.getPartidoKey());
+                Equipo eq = mundial.buscarEquipo(tk.getEquipoKey());
+                ResultadoEnum resu = partido.resultado(eq);
+                if (tk.getPronostico().equals(resu)) {
+                    aciertos++;
+                }
+            }            
         }
         return aciertos;
     }
+    
     @Override
     public String toString(){
         String msj = "Apostador= "+nombreCompleto + " " + idApostador + "\n";
