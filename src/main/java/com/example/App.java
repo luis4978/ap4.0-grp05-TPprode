@@ -1,35 +1,35 @@
 package com.example;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Scanner;
 import java.nio.file.Path;
 
-/**
- * Hello world!
- *
- */
+
 public class App 
 {
     public static void main( String[] args ) throws IOException
     {
-        //C:\Users\Luis\Desktop
-        /*Codigo a completar  */
-        Path archivo = Paths.get("C://Users//Luis//Desktop");
-        Scanner lector = new Scanner(archivo);
-        String titulo = lector.nextLine();
-        lector.useDelimiter("[;\\n]");
-        Ronda ronda = new Ronda();
-        while (lector.nextInt()) {
-            int clave = lector.nextInt();
-            String equipo1 = lector.next();
-            int golesEq1 = lector.nextInt();
-            int golesEq2 = lector.nextInt();
-            String equipo2 = lector.next();
-            
+        Path rutaEquipos = Paths.get("equiposqatar2022.csv");
+        Path rutaPartidos = Paths.get("partidosqatar2022.csv");
+        Path rutaApuestas = Paths.get("pronosticoqatar2022.csv");
+        Path archivoApostadores = Paths.get("datosapostadoresqatar2022.csv");
 
-            ronda.getPartidosHashMap().put(null, null)
-        }
+        Mundial2022 campeonato = new Mundial2022();
+        Prode prode = new Prode();
+        
+        CargaArchivos.cargaArchivoEquipos(rutaEquipos, campeonato.getEquiposHashMap());
+        CargaArchivos.cargarArchivoApuestas(rutaApuestas, prode.getTotalApuestas());
+        CargaArchivos.cargarArchivoPartidos(rutaPartidos, campeonato);
+        CargaArchivos.cargarArchivoApostadores(archivoApostadores, prode.getApostadores());
+
+        prode.cargarTicketsApuestas();//carga los tickets de cada apostador
+        prode.mostrarAciertos(campeonato);//Muestra los aciertos de cada apostador por ronda
+        /*
+         * Metodos para comprobar la carga correcta de los archivos
+         */
+        //campeonato.mostrarCargaEquipos();
+        //campeonato.mostrarCargaMundial();
+        //prode.mostrarCargaApuestas();
+        //prode.mostrarCargaApostadores();
     }
 }
