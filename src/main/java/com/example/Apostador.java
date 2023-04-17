@@ -1,54 +1,53 @@
 package com.example;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class Apostador  {
-    /*
-     * Un apostador puede tener varios tickets de
-     * distintas apuestas, se almacenan en un ArrayList.
-     */
-    ArrayList <Ticket> ticketApuesta;
+    private HashMap<Integer, Ticket> apuestasTot;
+    
     private int idApostador;
     private String nombreCompleto;
+    private int puntosTotales;
+    private final int PUNTOS_POR_ACIERTO = 1;
 
     public Apostador(int dni, String nombreCompleto){
         this.idApostador = dni;
+        this.puntosTotales = 0;
         this.nombreCompleto = nombreCompleto;
-        this.ticketApuesta = new ArrayList<>();
+        this.apuestasTot = new HashMap<>();
     }   
-
-    public void cargarTicket(Ticket tk){
-        this.ticketApuesta.add(tk);
-    }
 
     /*
      * El metodo contarAciertos() cuenta los aciertos de una sola ronda
+     * Se modifico el archivo apostadores (las primeras 16 lineas) 
+     * para que se acierte la ronda completa.
      */
-    public int contarAciertos(Mundial2022 mundial, Ronda ronda){
+    public int contarAciertos(Ronda r){
         int aciertos = 0;
-        for (Ticket tk : this.ticketApuesta) {
-            if (tk.getPartidoKey()/100 == ronda.getNumeroRonda()) {
-                Partido partido = ronda.buscarPartido(tk.getPartidoKey());
-                Equipo eq = mundial.buscarEquipo(tk.getEquipoKey());
-                ResultadoEnum resu = partido.resultado(eq);
-                if (tk.getPronostico().equals(resu)) {
-                    aciertos++;
-                }
-            }            
+        for(Partido p : r.getUnaRondaHashMap().values()){
+            ResultadoEnum pronostico = this.apuestasTot.get(p.getPartidoKEY()).getPronostico();
+            ResultadoEnum resultado = p.resultado();
+            if (pronostico.equals(resultado)) {
+                aciertos += this.PUNTOS_POR_ACIERTO;
+            }
         }
         return aciertos;
     }
-    
+    ////////////////////////////////////////////////////////////////////
     @Override
     public String toString(){
         String msj = "Apostador= "+nombreCompleto + " " + idApostador + "\n";
-        for (Ticket tk : ticketApuesta) {
+        for (Ticket tk : this.apuestasTot.values()) {
             msj += tk.toString() + "\n";
         }
         return msj;
     } 
+    
+    public void puntosPorRonda(int aciertos){
+        this.puntosTotales += aciertos;
+    }
 }

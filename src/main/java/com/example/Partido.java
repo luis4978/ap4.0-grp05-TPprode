@@ -22,17 +22,13 @@ public class Partido {
      * como argumento un equipo y verifica su resultado devolviendo
      * un valor del tipo ResultadoEnum.
     */
-    public ResultadoEnum resultado(Equipo equipo){
+    public ResultadoEnum resultado(){
         ResultadoEnum resultado = null;
         if (golesEquipo1 > golesEquipo2) {
-            if (equipo.equals(this.equipo1)) {
-                resultado = ResultadoEnum.GANADOR;
-            }
-
-        }if (golesEquipo1 < golesEquipo2) {
-            if (equipo.equals(this.equipo2)) {
-                resultado = ResultadoEnum.PERDEDOR;
-            }
+            resultado = ResultadoEnum.GANADOR;
+        }
+        if (golesEquipo1 < golesEquipo2) {
+            resultado = ResultadoEnum.PERDEDOR;
         }
         if (golesEquipo1 == golesEquipo2) {
             resultado = ResultadoEnum.EMPATE;

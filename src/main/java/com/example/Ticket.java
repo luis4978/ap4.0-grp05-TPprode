@@ -2,14 +2,12 @@ package com.example;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Setter
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor
 @ToString
 /*Clase que esta contenida en clase Apostador
  * 
@@ -23,7 +21,7 @@ public class Ticket {
      * ResultadoEnum (GANADOR, EMPATE, PERDEDOR).
      */
     private int partidoKey;
-    private String equipoKey;
+    private int equipoGanador;
     private ResultadoEnum pronostico;
 
 }

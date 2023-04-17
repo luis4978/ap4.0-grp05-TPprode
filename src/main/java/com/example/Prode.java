@@ -1,67 +1,55 @@
 package com.example;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
 @Setter
+@Getter
+
 public class Prode {
-    private ArrayList<String[]> totalApuestas;
     private HashMap<Integer, Apostador> apostadores;
+    private final int PUNTOS_EXTRA_RONDA = 3;
+    private int puntajeMasAlto;
+    private int idGanador;
 
     public Prode(){
-        this.totalApuestas = new ArrayList<String[]>();
         this.apostadores = new HashMap<Integer, Apostador>();
-    }
-
-    public void cargarTicketsApuestas(){
-        for (String[] ln : totalApuestas) {
-            Ticket tk = null;
-            int idApostador = Integer.parseInt(ln[0]);
-            int partidoKey = Integer.parseInt(ln[1]);
-            String eq1 = ln[2];
-            int gana1 = Integer.parseInt(ln[3]);
-            int empata = Integer.parseInt(ln[4]);
-            int gana2 = Integer.parseInt(ln[5]);
-            String eq2 = ln[6];
-            if (gana1 == 1) {
-                tk = new Ticket(partidoKey, eq1, ResultadoEnum.GANADOR);
-            }
-            if (gana2 == 1) {
-                tk = new Ticket(partidoKey, eq2, ResultadoEnum.GANADOR);
-            }
-            if (empata == 1) {
-                tk = new Ticket(partidoKey, eq1, ResultadoEnum.EMPATE);
-            }
-            this.apostadores.get(idApostador).cargarTicket(tk);
-        }
+        this.idGanador = 0;
+        this.puntajeMasAlto = 0;
     }
 
     public void mostrarAciertos(Mundial2022 campeonato){
-        /*
-         * al llamar al metodo contarAciertos lanza error de 
-         * partido null.
-         */
         for (Apostador ap : this.apostadores.values()) {
             for (Ronda r : campeonato.getPartidos().values()) {
-                System.out.println("Cantidad aciertos de "
-                                    + r.getNumeroRonda()+ "° ronda "
-                                    + ap.getNombreCompleto() + ": "
-                                    +ap.contarAciertos(campeonato, r));
+                int puntosPosibles = r.getUnaRondaHashMap().size();
+                int aciertos = ap.contarAciertos(r);
+                if(aciertos == puntosPosibles){
+                    aciertos += this.PUNTOS_EXTRA_RONDA;
+                    System.out.println(ap.getNombreCompleto()+" recibe "+this.PUNTOS_EXTRA_RONDA
+                            + " extra por acertar una ronda completa");
+                }
+                ap.puntosPorRonda(aciertos);
             }
+            if (ap.getPuntosTotales() > this.puntajeMasAlto) {
+                this.puntajeMasAlto = ap.getPuntosTotales();
+                this.idGanador = ap.getIdApostador();
+            }            
         }
+        Apostador ganador = this.apostadores.get(this.idGanador);
+        System.out.println("El ganador es "+ ganador.getNombreCompleto());
+        System.out.println("Obtuvo: "+ganador.getPuntosTotales()+" puntos");
     }
     /*
      * Metodo que muestra los datos del array totalApuestas.
      */
     public void mostrarCargaApuestas(){
-        for (String [] str : this.totalApuestas) {
-            for (String ln : str) {
-                System.out.print(ln+" ");   
+        for(Apostador ap : this.apostadores.values()){
+            System.out.println("Apostador: "+ap.getNombreCompleto()
+                    +" DNI: "+ap.getIdApostador());
+            for (Ticket tk : ap.getApuestasTot().values()) {
+                System.out.println(tk.toString());                
             }
-            System.out.println();
         }
     }
     public void mostrarCargaApostadores(){
