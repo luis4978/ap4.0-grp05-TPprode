@@ -10,6 +10,7 @@ import lombok.Setter;
 public class Prode {
     private ArrayList<String[]> totalApuestas;
     private HashMap<Integer, Apostador> apostadores;
+    private final int PUNTOS_EXTRA_RONDA = 3;
 
     public Prode(){
         this.totalApuestas = new ArrayList<String[]>();
@@ -36,6 +37,8 @@ public class Prode {
                 tk = new Ticket(partidoKey, eq1, ResultadoEnum.EMPATE);
             }
             this.apostadores.get(idApostador).cargarTicket(tk);
+            //Se muestra por pantalla la carga del ticket
+            System.out.println(tk.toString());
         }
     }
 
@@ -46,11 +49,20 @@ public class Prode {
          */
         for (Apostador ap : this.apostadores.values()) {
             for (Ronda r : campeonato.getPartidos().values()) {
+                int aciertosTotales = ap.contarAciertos(campeonato, r);
+                /*
+                if (r.getUnaRondaHashMap().size() == aciertosTotales) {
+                    aciertosTotales += this.PUNTOS_EXTRA_RONDA;
+                    System.out.println("Tamaño de Hash una ronda" + r.getUnaRondaHashMap().size());
+                    System.out.println("Se suman " + this.PUNTOS_EXTRA_RONDA
+                        + " extra por acertar la ronda.");
+                } */
                 System.out.println("Cantidad aciertos de "
                                     + r.getNumeroRonda()+ "° ronda "
                                     + ap.getNombreCompleto() + ": "
-                                    +ap.contarAciertos(campeonato, r));
+                                    + aciertosTotales);
             }
+            
         }
     }
     /*
