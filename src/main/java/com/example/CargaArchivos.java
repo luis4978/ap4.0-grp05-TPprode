@@ -87,7 +87,6 @@ final class CargaArchivos {
     (Path archivoPronosticos, HashMap<Integer, Apostador> aps) throws IOException{
         Scanner lector = new Scanner(archivoPronosticos);
         boolean esEncabezado = true;
-        boolean bandera = true;
         String encabezado;
         int eq = 0;
         lector.useDelimiter("[;\\n\\r]");
@@ -117,7 +116,7 @@ final class CargaArchivos {
             }
             Apostador ap = aps.get(idApostador);
             Ticket tk = new Ticket(partidoKey, eq, pronosticoResultado);
-            ap.apuestasTot.put(tk.getPartidoKey(), tk);
+            ap.getApuestasTot().put(tk.getPartidoKey(), tk);
         }
         lector.close();
     }

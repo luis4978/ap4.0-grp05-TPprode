@@ -7,33 +7,24 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Apostador  {
-    /*
-     * Un apostador puede tener varios tickets de
-     * distintas apuestas, se almacenan en un ArrayList.
-     */
-    HashMap<Integer, Ticket> apuestasTot;
+    private HashMap<Integer, Ticket> apuestasTot;
     
     private int idApostador;
     private String nombreCompleto;
+    private int puntosTotales;
     private final int PUNTOS_POR_ACIERTO = 1;
 
     public Apostador(int dni, String nombreCompleto){
         this.idApostador = dni;
+        this.puntosTotales = 0;
         this.nombreCompleto = nombreCompleto;
         this.apuestasTot = new HashMap<>();
     }   
 
     /*
      * El metodo contarAciertos() cuenta los aciertos de una sola ronda
-     */
-    ////////////////////////////////////////////////////////////////
-    /*
-     * Se modifico el archivo apostadores (las primeras 16 lineas).  
-     * Se modifico las apuestas de la ronda 1 de ruben gil
-     * para sumar 16 puntos por acertar todos los partidos
-     * y sumarles puntos extras por acertar la ronda.
-     * se debe revisar ya que no suma lo que deberia
-     * partiendo de este metodo y llegando hasta prode que hace la llamada
+     * Se modifico el archivo apostadores (las primeras 16 lineas) 
+     * para que se acierte la ronda completa.
      */
     public int contarAciertos(Ronda r){
         int aciertos = 0;
@@ -55,4 +46,8 @@ public class Apostador  {
         }
         return msj;
     } 
+    
+    public void puntosPorRonda(int aciertos){
+        this.puntosTotales += aciertos;
+    }
 }

@@ -7,15 +7,16 @@ import java.nio.file.Path;
 
 public class App 
 {
+    /**
+     * @param args
+     * @throws IOException
+     */
     public static void main( String[] args ) throws IOException
     {
 
         /* Pendiente de la reunion 15/04/2023
          * Pasar valores a base de datos.
-         * Determinar el apostador ganador.
-         * Resolver si acierta una ronda gana puntos extras.
          * Resolver conexion a base de datos.
-         * resolver el metodo contaraciertos
          */
         Path rutaEquipos = Paths.get("equiposqatar2022.csv");
         Path rutaPartidos = Paths.get("partidosqatar2022.csv");
