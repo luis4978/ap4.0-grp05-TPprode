@@ -2,7 +2,6 @@ package com.example;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -82,19 +81,43 @@ final class CargaArchivos {
       
     /*
      * Metodo estatico que vuelca los datos del archivo pronosticoqatar2022.csv
-     * en un array para su posterior tratamiento de datos.
+     * en el ticket de cada apostador.
      */
-    protected static void cargarArchivoApuestas
-    (Path archivoApuestas, ArrayList<String[]> totalApuestas) throws IOException{
-        Scanner lector = new Scanner(archivoApuestas);
+    protected static void cargarArchivoPronosticos
+    (Path archivoPronosticos, HashMap<Integer, Apostador> aps) throws IOException{
+        Scanner lector = new Scanner(archivoPronosticos);
         boolean esEncabezado = true;
+        boolean bandera = true;
         String encabezado;
+        int eq = 0;
+        lector.useDelimiter("[;\\n\\r]");
         while (lector.hasNextLine()) {
             if (esEncabezado) {
                 encabezado = lector.nextLine();
                 esEncabezado = false;
             }
-            totalApuestas.add(lector.nextLine().split(";"));
+            int idApostador = lector.nextInt();
+            int partidoKey = lector.nextInt();
+            String eq1 = lector.next();
+            int pronostico = lector.nextInt();
+            String eq2 = lector.next();
+            lector.nextLine();
+            ResultadoEnum pronosticoResultado;
+            switch (pronostico) {
+                case 1:
+                    eq = 1;
+                    pronosticoResultado = ResultadoEnum.GANADOR;
+                    break;
+                case 3:
+                    eq = 3;
+                    pronosticoResultado = ResultadoEnum.PERDEDOR;
+                    break;
+                default:
+                    pronosticoResultado = ResultadoEnum.EMPATE;
+            }
+            Apostador ap = aps.get(idApostador);
+            Ticket tk = new Ticket(partidoKey, eq, pronosticoResultado);
+            ap.apuestasTot.put(tk.getPartidoKey(), tk);
         }
         lector.close();
     }

@@ -1,0 +1,65 @@
+idApostador;Ronda;Partido;Equipo 1;1(Gana1)-2(Empate)-3(Gana2);Equipo 2
+22861213;1;101;Qatar;1;Ecuador
+22861213;1;102;England;2;Iran
+22861213;1;103;Senegal;1;Netherlands
+22861213;1;104;USMNT;2;Wales
+22861213;1;105;Argentina;1;Saudi Arabia
+22861213;1;106;Denmark;2;Tunisia
+22861213;1;107;Mexico;1;Poland
+22861213;1;108;France;3;Australia
+22861213;1;109;Morocco;3;Croatia
+22861213;1;110;Germany;2;Japan
+22861213;1;111;Spain;3;Costa Rica
+22861213;1;112;Belgium;2;Canada
+22861213;1;113;Switzerland;2;Cameroon
+22861213;1;114;Uruguay;1;South Korea
+22861213;1;115;Portugal;1;Ghana
+22861213;1;116;Brazil;3;Serbia
+22861213;2;201;Wales;2;Iran
+22861213;2;202;Qatar;2;Senegal
+22861213;2;203;Netherlands;3;Ecuador
+22861213;2;204;England;2;USMNT
+22861213;2;205;Tunisia;2;Australia
+22861213;2;206;Poland;2;Saudi Arabia
+22861213;2;207;France;3;Denmark
+22861213;2;208;Argentina;3;Mexico
+22861213;2;209;Japan;3;Costa Rica
+22861213;2;210;Belgium;3;Morocco
+22861213;2;211;Croatia;2;Canada
+22861213;2;212;Spain;3;Germany
+22861213;2;213;Cameroon;3;Serbia
+22861213;2;214;South Korea;2;Ghana
+22861213;2;215;Brazil;3;Switzerland
+22861213;2;216;Portugal;3;Uruguay
+22861213;3;301;Ecuador;3;Senegal
+22861213;3;302;Netherlands;2;Qatar
+22861213;3;303;Wales;1;England
+22861213;3;304;Iran;3;USMNT
+22861213;3;305;Australia;2;Denmark
+22861213;3;306;Tunisia;2;France
+22861213;3;307;Saudi Arabia;1;Mexico
+22861213;3;308;Poland;2;Argentina
+22861213;3;309;Croatia;1;Belgium
+22861213;3;310;Canada;3;Morocco
+22861213;3;311;Japan;2;Spain
+22861213;3;312;Costa Rica;3;Germany
+22861213;3;313;Ghana;1;Uruguay
+22861213;3;314;South Korea;1;Portugal
+22861213;3;315;Cameroon;2;Brazil
+22861213;3;316;Serbia;2;Switzerland
+22861213;4;401;Netherlands;3;USMNT
+22861213;4;402;Argentina;3;Australia
+22861213;4;403;France;2;Poland
+22861213;4;404;England;3;Senegal
+22861213;4;405;Japan;1;Croatia
+22861213;4;406;Brazil;1;South Korea
+22861213;4;407;Morocco;3;Spain
+22861213;4;408;Portugal;3;Switzerland
+22861213;5;501;Croatia;1;Brazil
+22861213;5;502;Netherlands;3;Argentina
+22861213;5;503;Morocco;3;Portugal
+22861213;5;504;England;1;France
+22861213;6;601;Argentina;3;Croatia
+22861213;6;602;France;2;Morocco
+22861213;7;701;Croatia;2;Morocco
+22861213;7;702;Argentina;1;France
