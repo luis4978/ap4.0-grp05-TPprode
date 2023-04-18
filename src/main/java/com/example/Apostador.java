@@ -18,7 +18,7 @@ public class Apostador  {
         this.idApostador = dni;
         this.puntosTotales = 0;
         this.nombreCompleto = nombreCompleto;
-        this.apuestasTot = new HashMap<>();
+        this.apuestasTot = new HashMap<Integer, Ticket>();
     }   
 
     /*

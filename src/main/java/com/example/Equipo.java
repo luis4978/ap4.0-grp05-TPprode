@@ -12,7 +12,5 @@ import lombok.ToString;
 @ToString
 public class Equipo {
     private String nombreEquipo;
-    private int temporada;
-    private String Pais;
-    private short partidosJugados;    
+    private int partidosJugados;    
 }
