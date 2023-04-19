@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Apostador  {
+public class Apostador implements Comparable<Apostador>  {
     private HashMap<Integer, Ticket> apuestasTot;
     
     private int idApostador;
@@ -49,5 +49,11 @@ public class Apostador  {
     
     public void puntosPorRonda(int aciertos){
         this.puntosTotales += aciertos;
+    }
+    @Override
+    public int compareTo(Apostador ap){
+        String a = new String(String.valueOf(this.puntosTotales));
+        String b = new String(String.valueOf(ap.getPuntosTotales()));
+        return b.compareTo(a);
     }
 }
