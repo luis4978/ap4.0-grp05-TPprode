@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class ConexioBD {
     static final String DB_URL = "jdbc:mysql://localhost/Prode";
     static final String USER = "root";
-    static final String PASS = "Charrua2890";
+    static final String PASS = "emilia2018";
     
     /*
      * Establecer la conexion.
@@ -29,7 +29,7 @@ public class ConexioBD {
         /*
          * Para ejecutar un SELECT se usa executeQery
          */
-        ResultSet rs = st.executeQuery("select * from apostadores");
+        ResultSet rs = st.executeQuery("select * from datosapostadoresqatar2022");
         /*
          * Para leer las filas de la BD un ciclo while
          */

@@ -33,14 +33,6 @@ public class App
         //Muestra los aciertos de cada apostador por ronda
         prode.mostrarAciertos(campeonato);
 
-        ArrayList<Apostador> ordenGanador = new ArrayList<>();
-        for (Apostador ap : prode.getApostadores().values()) {
-            ordenGanador.add(ap); 
-        }
-        Collections.sort(ordenGanador);
-        for (Apostador apostador : ordenGanador) {
-            System.out.println(apostador.getNombreCompleto()
-                            +" = "+ apostador.getPuntosTotales());
-        }
+       prode.apostadorGanador();
     }
 }

@@ -1,5 +1,7 @@
 package com.example;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import lombok.Getter;
 import lombok.Setter;
@@ -55,6 +57,18 @@ public class Prode {
     public void mostrarCargaApostadores(){
         for (Apostador ap : this.apostadores.values()) {
             System.out.println(ap.toString());
+        }
+    }
+    public void apostadorGanador(){
+        
+        ArrayList<Apostador> ordenGanador = new ArrayList<>();
+        for (Apostador ap : this.apostadores.values()) {
+            ordenGanador.add(ap); 
+        }
+        Collections.sort(ordenGanador);
+        for (Apostador apostador : ordenGanador) {
+            System.out.println(apostador.getNombreCompleto()
+                            +" = "+ apostador.getPuntosTotales());
         }
     }
 }
