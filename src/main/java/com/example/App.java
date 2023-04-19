@@ -2,6 +2,9 @@ package com.example;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+
 
 public class App 
 {
@@ -27,6 +30,17 @@ public class App
         ConexioBD.cargarPartidos(campeonato);
         ConexioBD.cargarPronosticos(prode.getApostadores());
         
-        prode.mostrarAciertos(campeonato);//Muestra los aciertos de cada apostador por ronda
+        //Muestra los aciertos de cada apostador por ronda
+        prode.mostrarAciertos(campeonato);
+
+        ArrayList<Apostador> ordenGanador = new ArrayList<>();
+        for (Apostador ap : prode.getApostadores().values()) {
+            ordenGanador.add(ap); 
+        }
+        Collections.sort(ordenGanador);
+        for (Apostador apostador : ordenGanador) {
+            System.out.println(apostador.getNombreCompleto()
+                            +" = "+ apostador.getPuntosTotales());
+        }
     }
 }
