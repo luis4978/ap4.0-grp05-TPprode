@@ -7,36 +7,31 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 
-public class ConexioBD {
-    static final String DB_URL = "jdbc:mysql://localhost/Prode";
+public class ConexioBD { //VER DATOS DE BBDD PARA LA CONEXIÓN LOCAL
+    static final String DB_URL = "jdbc:mysql://localhost:3306/prode";
     static final String USER = "root";
-    static final String PASS = "emilia2018";
+    static final String PASS = "imHayastan22";
     
-    /*
-     * Establecer la conexion.
-     * El primer parametro es la cadena de conexion.
-     */
+    
+     /* 
+     Establecer la conexion.
+     El primer parametro es la cadena de conexion.
+     */ 
+     
     public static void cargarApostadores
     (HashMap<Integer, Apostador> apostadores) throws SQLException {
         Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
-        /*
-         * Sin no se clavo, se pudo conectar bien.
-         * crear un objeto Statement para enviar sentencias sql
-         */
+        // crear un objeto Statement para enviar sentencias sql
         Statement st = conn.createStatement();
 
-        /*
-         * Para ejecutar un SELECT se usa executeQery
-         */
+        //Para ejecutar un SELECT se usa executeQery
+        
         ResultSet rs = st.executeQuery("select * from datosapostadoresqatar2022");
-        /*
-         * Para leer las filas de la BD un ciclo while
-         */
+        //Para leer las filas de la BD un ciclo while
+         
         while (rs.next()) {
-            /*
-             * Una vuelta por cada fila.
-             */
+            // Una vuelta por cada fila del select.
             int id = rs.getInt("idApostador");
             String nombreCompleto = rs.getString("NombreCompleto");
             Apostador ap = new Apostador(id, nombreCompleto);
@@ -121,6 +116,9 @@ public class ConexioBD {
             apostador.getApuestasTot().put(tk.getPartidoKey(), tk);
         }
         System.out.println("Carga Pronosticos exitosa.");
+
+        rs.close();// agrego cierre del result set
         conn.close();
+        
     }
 }
