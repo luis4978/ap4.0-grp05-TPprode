@@ -1,5 +1,1 @@
-{
-    "DB_URL" : "jdbc:mysql://localhost/prode",
-    "USER" : "root",
-    "PASS" : "Charrua2890"
-}
+configuracionBD.json
