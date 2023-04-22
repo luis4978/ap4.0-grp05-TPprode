@@ -3,14 +3,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Equipo {
-    String nombreEquipo;
-    String descripcion;
-    //Se deben agregar variables para la lectura del archivo Equipos.csv
-
+    private String nombreEquipo;
+    private int partidosJugados;    
 }

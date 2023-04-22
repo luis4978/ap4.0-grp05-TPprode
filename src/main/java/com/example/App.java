@@ -1,35 +1,34 @@
 package com.example;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Scanner;
-import java.nio.file.Path;
+import java.sql.SQLException;
 
-/**
- * Hello world!
- *
- */
+
 public class App 
 {
-    public static void main( String[] args ) throws IOException
+    /**
+     * @param args
+     * @throws IOException
+     * @throws SQLException
+     */
+    public static void main( String[] args ) throws IOException, SQLException
     {
-        //C:\Users\Luis\Desktop
-        /*Codigo a completar  */
-        Path archivo = Paths.get("C://Users//Luis//Desktop");
-        Scanner lector = new Scanner(archivo);
-        String titulo = lector.nextLine();
-        lector.useDelimiter("[;\\n]");
-        Ronda ronda = new Ronda();
-        while (lector.nextInt()) {
-            int clave = lector.nextInt();
-            String equipo1 = lector.next();
-            int golesEq1 = lector.nextInt();
-            int golesEq2 = lector.nextInt();
-            String equipo2 = lector.next();
-            
 
-            ronda.getPartidosHashMap().put(null, null)
-        }
+        /* 
+        Se adjunta Script TP Prode.sql para
+        creacion de BD, tablas y carga de datos
+         */
+        Mundial2022 campeonato = new Mundial2022();
+        Prode prode = new Prode();
+
+        ConexioBD.cargarApostadores(prode.getApostadores());
+        ConexioBD.cargarEquipos(campeonato.getEquiposHashMap());
+        ConexioBD.cargarPartidos(campeonato);
+        ConexioBD.cargarPronosticos(prode.getApostadores());
+        
+        //Muestra los aciertos de cada apostador por ronda
+        prode.mostrarAciertos(campeonato);
+
+       prode.apostadorGanador();
     }
 }

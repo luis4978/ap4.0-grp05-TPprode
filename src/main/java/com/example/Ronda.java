@@ -1,7 +1,5 @@
 package com.example;
-import java.util.ArrayList;
 import java.util.HashMap;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,22 +11,23 @@ import lombok.Setter;
 
 public class Ronda {
     private int numeroRonda;
-    private HashMap<Integer, Partido> partidosHashMap;
-
-    public Ronda(){
-        partidosHashMap = new HashMap();
-    }
-
-    /* Metodo que recibe como argumento un entero 
-     * que es valor clave para recorrer partidosHashMap y buscar un partido,
-     * la Clase Ticket tiene un atributo
-     * con un valor que define la apuesta sobre un partido
-     * de forma univoca.
-     * El metodo devuelve un bjeto del tipo Partido.
+    /* Atributo de clase
+     * unaRondaHashMap usa como clave univoca el valor de
+     * la primera columna del archivo "Partidos Qatar 2022.csv"
      */
-    public Partido partido(int rondaKey){
-        Partido partidoBuscado = new Partido();
-        partidoBuscado = partidosHashMap.get(rondaKey);
-        return partidoBuscado;
+    private HashMap<Integer, Partido> unaRondaHashMap;
+
+    public Ronda(int numeroRonda){
+        /*
+         * Constructor que instancia HashMap vacio.
+         * Recibe como argumento el numero de ronda a cargar.
+         */
+        this.numeroRonda = numeroRonda;
+        this.unaRondaHashMap = new HashMap<>();
+    }
+    public Partido buscarPartido(int partidoKey){
+        Partido p;
+        p = this.unaRondaHashMap.get(partidoKey);
+        return p;
     }
 }
