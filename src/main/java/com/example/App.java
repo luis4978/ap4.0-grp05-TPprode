@@ -21,10 +21,11 @@ public class App
         Mundial2022 campeonato = new Mundial2022();
         Prode prode = new Prode();
 
-        ConexioBD.cargarApostadores(prode.getApostadores());
-        ConexioBD.cargarEquipos(campeonato.getEquiposHashMap());
-        ConexioBD.cargarPartidos(campeonato);
-        ConexioBD.cargarPronosticos(prode.getApostadores());
+        CargaDatosBD.cargarConfiguracioBD();
+        CargaDatosBD.cargarApostadores(prode.getApostadores());
+        CargaDatosBD.cargarEquipos(campeonato.getEquiposHashMap());
+        CargaDatosBD.cargarPartidos(campeonato);
+        CargaDatosBD.cargarPronosticos(prode.getApostadores());
         
         //Muestra los aciertos de cada apostador por ronda
         prode.mostrarAciertos(campeonato);

@@ -2,19 +2,38 @@ package com.example;
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 
-public class CargaDatosBD {
-    private static String DB_URL = ConexionBD.DB_URL;
-    private static String USER = ConexionBD.USER;
-    private static String PASS = ConexionBD.PASS;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Map;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
+
+
+public class CargaDatosBD { 
+    
+    static String DB_URL;
+    static String USER;
+    static String PASS;
+    
     /*
      * Establecer la conexion.
      * El primer parametro es la cadena de conexion.
      */
+    public static void cargarConfiguracioBD() throws IOException{
+        String datosConexion = Files.readString(Paths.get("configuracionBD.json"));
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> map = mapper.readValue(datosConexion, new TypeReference<Map<String, Object>>() {});
+        CargaDatosBD.DB_URL = (String) map.get("DB_URL");
+        CargaDatosBD.USER = (String) map.get("USER");
+        CargaDatosBD.PASS = (String) map.get("PASS");
+    }
     public static void cargarApostadores
     (HashMap<Integer, Apostador> apostadores) throws SQLException {
         Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -29,7 +48,7 @@ public class CargaDatosBD {
          * Para ejecutar un SELECT se usa executeQery
          */
         ResultSet rs = st.executeQuery("select * from datosapostadoresqatar2022");
-        /*
+        /*git pull
          * Para leer las filas de la BD un ciclo while
          */
         while (rs.next()) {

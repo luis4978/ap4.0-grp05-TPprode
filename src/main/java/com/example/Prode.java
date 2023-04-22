@@ -12,16 +12,15 @@ import lombok.Setter;
 public class Prode {
     private HashMap<Integer, Apostador> apostadores;
     private final int PUNTOS_EXTRA_RONDA = 3;
-    private int puntajeMasAlto;
     private int idGanador;
 
     public Prode(){
         this.apostadores = new HashMap<Integer, Apostador>();
         this.idGanador = 0;
-        this.puntajeMasAlto = 0;
     }
 
     public void mostrarAciertos(Mundial2022 campeonato){
+        int puntajeMasAlto = 0;
         for (Apostador ap : this.apostadores.values()) {
             for (Ronda r : campeonato.getPartidos().values()) {
                 int puntosPosibles = r.getUnaRondaHashMap().size();
@@ -33,8 +32,8 @@ public class Prode {
                 }
                 ap.puntosPorRonda(aciertos);
             }
-            if (ap.getPuntosTotales() > this.puntajeMasAlto) {
-                this.puntajeMasAlto = ap.getPuntosTotales();
+            if (ap.getPuntosTotales() > puntajeMasAlto) {
+                puntajeMasAlto = ap.getPuntosTotales();
                 this.idGanador = ap.getIdApostador();
             }            
         }
