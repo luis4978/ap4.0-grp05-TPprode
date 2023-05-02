@@ -21,23 +21,24 @@ public class Prode {
 
     public void mostrarAciertos(Mundial2022 campeonato){
         int puntajeMasAlto = 0;
+        Apostador ganador = null;
         for (Apostador ap : this.apostadores.values()) {
             for (Ronda r : campeonato.getPartidos().values()) {
                 int puntosPosibles = r.getUnaRondaHashMap().size();
                 int aciertos = ap.contarAciertos(r);
+                ap.calcularPuntaje(aciertos);
                 if(aciertos == puntosPosibles){
-                    aciertos += this.PUNTOS_EXTRA_RONDA;
+                    ap.sumarPuntosExtra(PUNTOS_EXTRA_RONDA);
                     System.out.println(ap.getNombreCompleto()+" recibe "+this.PUNTOS_EXTRA_RONDA
                             + " extra por acertar una ronda completa");
                 }
-                ap.puntosPorRonda(aciertos);
+                
             }
             if (ap.getPuntosTotales() > puntajeMasAlto) {
                 puntajeMasAlto = ap.getPuntosTotales();
-                this.idGanador = ap.getIdApostador();
+                ganador = this.apostadores.get(ap.getIdApostador());
             }            
         }
-        Apostador ganador = this.apostadores.get(this.idGanador);
         System.out.println("El ganador es "+ ganador.getNombreCompleto());
         System.out.println("Obtuvo: "+ganador.getPuntosTotales()+" puntos");
     }

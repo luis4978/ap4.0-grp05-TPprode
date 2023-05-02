@@ -36,6 +36,14 @@ public class Apostador implements Comparable<Apostador>  {
             }
         }
         return aciertos;
+    } 
+    public void calcularPuntaje(int aciertos){
+        int puntosObtenidos = aciertos * this.PUNTOS_POR_ACIERTO;
+        this.puntosTotales += puntosObtenidos;
+    }
+
+    public void sumarPuntosExtra(int puntosExtra){
+        this.puntosTotales += puntosExtra;
     }
     ////////////////////////////////////////////////////////////////////
     @Override
@@ -47,9 +55,6 @@ public class Apostador implements Comparable<Apostador>  {
         return msj;
     } 
     
-    public void puntosPorRonda(int aciertos){
-        this.puntosTotales += aciertos;
-    }
     @Override
     public int compareTo(Apostador ap){
         String a = new String(String.valueOf(this.puntosTotales));
